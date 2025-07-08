@@ -74,11 +74,11 @@ normals.ppt$ppt
 normals.ppt$ppt %>% names()
 normals.ppt$ppt %>% time()
 
-ggplot() + geom_spatraster(data=normals.ppt$ppt[[1]])
+ggplot() + geom_spatraster(data=normals.ppt$ppt[[1]]) + scale_fill_continuous(na.value = "transparent")
 
 ```
 #### Raster algebra
-Many generic functions that allow for simple and elegant raster algebra have been implemented for SpatRaster objects, including the normal algebraic operators such as +, -, *, /, logical operators such as >, >=, <, ==, !} and functions such as abs, round, ceiling, floor, trunc, sqrt, log, log10, exp, cos, sin, max, min, range, prod, sum, any, all. In these functions you can mix terra objects with numbers, as long as the first argument is a terra object. If you use multiple SpatRaster objects, all objects must have the same resolution and origin. 
+Many generic functions that allow for simple and elegant raster algebra have been implemented for SpatRaster objects, including the normal algebraic operators such as +, -, *, /, logical operators such as >, >=, <, ==, !} and functions such as abs(), round(), ceiling(), floor(), trunc(), sqrt(), log(), log10(), exp(), cos(), sin(), max(), min(), range(), prod(), sum(), any(), all(). In these functions you can mix terra objects with numbers, as long as the first argument is a terra object. If you use multiple SpatRaster objects, all objects must have the same resolution and origin. 
 
 Lets summarize monthly data to annual normals: 
 
@@ -106,7 +106,7 @@ normals.ppt.annual %>% global( na.rm=T, mean)
 
 #### Spatial Summaries
 
-You might also find it useful to create zonal summaries for each polygon within the simple feature. To do this we can use the function zonal, which takes a SpatRast and a SpatVect.
+You might also find it useful to create zonal summaries for each polygon within the simple feature. To do this we can use the function zonal(), which takes a SpatRast and a SpatVect.
 
 ```{r, include=T}
 
@@ -180,7 +180,7 @@ FLUXNET.ch4.ppt.sf <- FLUXNET.ch4 %>% cbind(FLUXNET.ch4.ppt)
 Visualize your work:
 
 ```{r, include=T}
-ggplot()+  geom_sf(data = aoi.global) + geom_sf( data = FLUXNET.ch4.ppt.sf, aes( col= ppt_1961.09.01_19812010)) 
+ggplot()+  geom_sf(data = aoi.global) + geom_sf( data = FLUXNET.ch4.ppt.sf, aes( col= ppt_1961.09.01_19812010)) + scale_fill_continuous(na.value = "transparent") + labs( col = "PPT (mm)")
 ```
 
 FLUXNET data can be used to understand patterns in natural methane fluxes. Evaluating the conditions where measurements are taken is essential to designing a useful model. 
